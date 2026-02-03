@@ -1,355 +1,653 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Azuri Dental - Company Profile</title>
 
     <!-- ===================== CSS STYLE ===================== -->
     <style>
-        /* ===================== RESET ===================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      /* ===================== RESET ===================== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      body {
+        background-color: #f6f6f6;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      /* ===================== GLOBAL ===================== */
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: auto;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0b4da2;
+        font-size: 32px;
+      }
+
+      /* ===================== HEADER / NAVBAR ===================== */
+      header {
+        color: white;
+        padding: 20px 0;
+        position: fixed;
+        width: 100%;
+        z-index: 999;
+        background: transparent;
+        backdrop-filter: none;
+        transition: all 0.3s ease;
+      }
+
+      header.scrolled {
+        background: rgba(123, 137, 154, 0.65);
+        backdrop-filter: blur(12px);
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .logo {
+        font-size: 28px;
+        color: #d1ecff;
+        font-family: "Poppins", sans-serif;
+        font-weight: bold;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-menu a {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 700;
+        color: #d1ecff;
+        transition: 0.3s;
+        font-size: large;
+      }
+
+      .nav-menu a:hover {
+        color: #d9e6ff;
+      }
+
+      /* ===================== HERO SECTION ===================== */
+      .hero {
+        position: relative;
+        background: url("https://images.unsplash.com/photo-1620775997427-9175928218d2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+          center/cover no-repeat;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.45),
+          rgba(0, 0, 0, 0.65)
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 700px;
+        margin: auto;
+      }
+
+      .hero h1 {
+        font-family: "Poppins", sans-serif;
+        font-size: 56px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+      }
+
+      .hero p {
+        font-family: "Montserrat", sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        color: rgba(255, 255, 255, 0.85);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .hero-content::after {
+        content: "";
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: #ffffff;
+        margin: 30px auto 0;
+        opacity: 0.8;
+      }
+
+      /* ===================== BEST PRODUK ===================== */
+      .produk-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px;
+      }
+
+      #produk h2,
+      #legalitas h2,
+      #barang h2 {
+        font-family: "Poppins", sans-serif;
+      }
+
+      .produk-card {
+        background: #fff;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid #eaeaea;
+        transition: transform 0.3s ease;
+      }
+
+      .produk-card:hover {
+        transform: translateY(-6px);
+      }
+
+      .produk-card img {
+        height: 220px;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: 0.3s;
+      }
+
+      .produk-card:hover img {
+        filter: grayscale(0%);
+      }
+
+      .produk-info {
+        padding: 22px 24px 28px;
+      }
+
+      .produk-info h3 {
+        font-size: 18px;
+        font-weight: 600;
+        color: #0b4da2;
+        margin-bottom: 8px;
+      }
+
+      .produk-info p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #666;
+      }
+
+      .section-desc {
+        font-family: "Montserrat", sans-serif;
+        max-width: 600px;
+        margin: 0 auto 50px;
+        text-align: center;
+        font-weight: 600;
+        color: #666;
+        font-size: 15px;
+      }
+
+      /* ===================== LEGALITAS ===================== */
+      .legal-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .legal-card {
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .legal-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .legal-card img {
+        height: 160px;
+        width: 100%;
+        object-fit: cover;
+        filter: grayscale(40%);
+      }
+
+      .legal-info {
+        padding: 18px 20px 22px;
+      }
+
+      .legal-badge {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        color: #555;
+        border: 1px solid #ddd;
+        padding: 4px 8px;
+        border-radius: 999px;
+        margin-bottom: 10px;
+      }
+
+      .legal-info h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #222;
+      }
+
+      .legal-info p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #666;
+      }
+
+      /* ===================== BARANG ===================== */
+      .barang-card {
+        position: relative;
+        min-width: 260px;
+        height: 360px;
+        border-radius: 16px;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .barang-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(20%);
+        transition: transform 0.4s ease;
+      }
+
+      .barang-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.65),
+          rgba(0, 0, 0, 0.1)
+        );
+        z-index: 1;
+      }
+
+      .barang-card span {
+        position: absolute;
+        bottom: 24px;
+        left: 20px;
+        right: 20px;
+        z-index: 2;
+
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 1.4;
+      }
+
+      .barang-card:hover img {
+        transform: scale(1.05);
+      }
+
+      .barang-track {
+        animation: scroll 30s linear infinite;
+      }
+
+      .barang-track {
+        display: flex;
+        gap: 30px;
+        width: max-content;
+      }
+
+      .barang-scroll {
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+
+      .barang-scroll::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      .barang-scroll::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 999px;
+      }
+
+      /* ===================== FOOTER ===================== */
+      footer {
+        background: #0b4da2;
+        color: white;
+        text-align: center;
+        padding: 25px 0;
+      }
+
+      /* ===================== RESPONSIVE ===================== */
+
+      /* Tablet */
+      @media (max-width: 1023px) {
+        .produk-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
 
-        body {
-            background-color: #f5f7fa;
-            color: #333;
-            line-height: 1.6;
+        .legal-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ===================== GLOBAL ===================== */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        h2 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #0b4da2;
-            font-size: 32px;
-        }
-
-        /* ===================== HEADER / NAVBAR ===================== */
-        header {
-            background-color: #0b4da2;
-            color: white;
-            padding: 20px 0;
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-menu a {
-            color: white;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .nav-menu a:hover {
-            color: #d9e6ff;
-        }
-
-        /* ===================== HERO SECTION ===================== */
-        .hero {
-            background: linear-gradient(rgba(11,77,162,0.7), rgba(11,77,162,0.7)),
-                        url("https://images.unsplash.com/photo-1606813909029-77db1f49d6f4") center/cover no-repeat;
-            color: white;
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 700px;
-            margin: auto;
+        .barang-grid {
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .hero h1 {
-            font-size: 56px;
-            margin-bottom: 20px;
+          font-size: 42px;
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 767px) {
+        .navbar {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .nav-menu {
+          flex-direction: column;
+          width: 100%;
+          margin-top: 20px;
+          gap: 15px;
+        }
+
+        .produk-grid,
+        .legal-grid,
+        .barang-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero h1 {
+          font-size: 36px;
         }
 
         .hero p {
-            font-size: 20px;
-            opacity: 0.9;
+          font-size: 16px;
         }
 
-        /* ===================== BEST PRODUK ===================== */
-        .produk-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 25px;
+        section {
+          padding: 60px 0;
         }
 
-        .produk-card {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: 0.3s;
+        .barang-card {
+          min-width: 160px;
+          height: 200px;
+          border-radius: 14px;
         }
 
-        .produk-card:hover {
-            transform: translateY(-5px);
+        .barang-card span {
+          font-size: 14px;
+          bottom: 16px;
+          left: 16px;
+          right: 16px;
         }
 
-        .produk-card img {
-            height: 200px;
-            object-fit: cover;
+        .barang-track {
+          gap: 16px;
         }
-
-        .produk-info {
-            padding: 20px;
-        }
-
-        .produk-info h3 {
-            margin-bottom: 10px;
-            color: #0b4da2;
-        }
-
-        /* ===================== LEGALITAS ===================== */
-        .legal-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .legal-card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
-        .legal-card h3 {
-            margin-bottom: 15px;
-            color: #0b4da2;
-        }
-
-        /* ===================== BARANG ===================== */
-        .barang-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .barang-item {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-        }
-
-        /* ===================== FOOTER ===================== */
-        footer {
-            background: #0b4da2;
-            color: white;
-            text-align: center;
-            padding: 25px 0;
-        }
-
-        /* ===================== RESPONSIVE ===================== */
-
-        /* Tablet */
-        @media (max-width: 1023px) {
-            .produk-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .legal-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .barang-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero h1 {
-                font-size: 42px;
-            }
-        }
-
-        /* Mobile */
-        @media (max-width: 767px) {
-            .navbar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-menu {
-                flex-direction: column;
-                width: 100%;
-                margin-top: 20px;
-                gap: 15px;
-            }
-
-            .produk-grid,
-            .legal-grid,
-            .barang-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
+    <div></div>
     <!-- ===================== HEADER / NAVBAR ===================== -->
     <header>
-        <div class="container navbar">
-            <div class="logo">Azuri Dental</div>
-            <nav class="nav-menu">
-                <a href="#home">Home</a>
-                <a href="#produk">Best Produk</a>
-                <a href="#legalitas">Legalitas</a>
-                <a href="#barang">Barang</a>
-            </nav>
-        </div>
+      <div class="container navbar">
+        <div class="logo">Azuri Dental</div>
+        <nav class="nav-menu">
+          <a href="#home">Home</a>
+          <a href="#produk">Best Produk</a>
+          <a href="#legalitas">Legalitas</a>
+          <a href="#barang">Barang</a>
+        </nav>
+      </div>
     </header>
 
     <!-- ===================== HERO / HOME ===================== -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Azuri Dental</h1>
-            <p>
-                Penyedia produk dental profesional dengan kualitas terbaik dan standar kesehatan tinggi
-                untuk mendukung pelayanan klinik dan rumah sakit di seluruh Indonesia.
-            </p>
-        </div>
+      <div class="hero-content">
+        <h1>Azuri Dental</h1>
+        <p>
+          Penyedia produk dental profesional dengan kualitas terbaik dan standar
+          kesehatan tinggi untuk mendukung pelayanan klinik dan rumah sakit di
+          seluruh Indonesia.
+        </p>
+      </div>
     </section>
 
     <!-- ===================== BEST PRODUK ===================== -->
     <section id="produk">
-        <div class="container">
-            <h2>Best Produk</h2>
-
-            <div class="produk-grid">
-                <div class="produk-card">
-                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" alt="Dental Unit">
-                    <div class="produk-info">
-                        <h3>Dental Unit Chair</h3>
-                        <p>Kursi dental ergonomis dengan teknologi modern untuk kenyamanan dokter dan pasien.</p>
-                    </div>
-                </div>
-
-                <div class="produk-card">
-                    <img src="https://images.unsplash.com/photo-1580281657521-5c7b8cba21b8" alt="X-Ray Dental">
-                    <div class="produk-info">
-                        <h3>Dental X-Ray</h3>
-                        <p>Perangkat radiologi dental dengan hasil gambar presisi tinggi.</p>
-                    </div>
-                </div>
-
-                <div class="produk-card">
-                    <img src="https://images.unsplash.com/photo-1606813909029-77db1f49d6f4" alt="Scaler">
-                    <div class="produk-info">
-                        <h3>Ultrasonic Scaler</h3>
-                        <p>Alat pembersih karang gigi dengan getaran ultrasonik yang efektif.</p>
-                    </div>
-                </div>
-
-                <div class="produk-card">
-                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782fe0" alt="Dental Lamp">
-                    <div class="produk-info">
-                        <h3>Dental Lamp</h3>
-                        <p>Lampu dental LED dengan pencahayaan optimal dan hemat energi.</p>
-                    </div>
-                </div>
+      <div class="container">
+        <h2>Best Produk</h2>
+        <p class="section-desc">
+          Produk unggulan pilihan dengan standar kualitas tinggi untuk kebutuhan
+          klinik dan rumah sakit.
+        </p>
+        <div class="produk-grid">
+          <div class="produk-card">
+            <img
+              src="https://images.unsplash.com/photo-1722586663955-2f96a4c1f255?q=80&w=1071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Dental Unit"
+            />
+            <div class="produk-info">
+              <h3>Dental Unit Chair</h3>
+              <p>
+                Kursi dental ergonomis dengan teknologi modern untuk kenyamanan
+                dokter dan pasien.
+              </p>
             </div>
+          </div>
+
+          <div class="produk-card">
+            <img
+              src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="X-Ray Dental"
+            />
+            <div class="produk-info">
+              <h3>Dental X-Ray</h3>
+              <p>
+                Perangkat radiologi dental dengan hasil gambar presisi tinggi.
+              </p>
+            </div>
+          </div>
+
+          <div class="produk-card">
+            <img
+              src="https://images.unsplash.com/photo-1626736985932-c0df2ae07a2e?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Scaler"
+            />
+            <div class="produk-info">
+              <h3>Ultrasonic Scaler</h3>
+              <p>
+                Alat pembersih karang gigi dengan getaran ultrasonik yang
+                efektif.
+              </p>
+            </div>
+          </div>
+
+          <div class="produk-card">
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAVqXlimIGeYYEaQ8dhb1HdqDBMK7vwPqT7g&s"
+              alt="Dental Lamp"
+            />
+            <div class="produk-info">
+              <h3>Dental Lamp</h3>
+              <p>
+                Lampu dental LED dengan pencahayaan optimal dan hemat energi.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- ===================== LEGALITAS ===================== -->
-    <section id="legalitas" style="background:#eef3fb;">
-        <div class="container">
-            <h2>Legalitas Perusahaan</h2>
-
-            <div class="legal-grid">
-                <div class="legal-card">
-                    <h3>Terdaftar Resmi</h3>
-                    <p>Azuri Dental merupakan perusahaan resmi yang terdaftar secara legal di Indonesia.</p>
-                </div>
-
-                <div class="legal-card">
-                    <h3>Izin Edar</h3>
-                    <p>Seluruh produk memiliki izin edar sesuai regulasi alat kesehatan nasional.</p>
-                </div>
-
-                <div class="legal-card">
-                    <h3>Standar Kesehatan</h3>
-                    <p>Produk memenuhi standar mutu dan keamanan alat kesehatan dental.</p>
-                </div>
+    <section id="legalitas" style="background: #eef3fb">
+      <div class="container">
+        <h2>Legalitas Perusahaan</h2>
+        <div class="legal-grid">
+          <div class="legal-card">
+            <img
+              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"
+              alt="Bukti Legalitas"
+            />
+            <div class="legal-info">
+              <span class="legal-badge">Legal</span>
+              <h3>Terdaftar Resmi</h3>
+              <p>
+                Azuri Dental merupakan perusahaan resmi yang terdaftar secara
+                hukum di Indonesia.
+              </p>
             </div>
+          </div>
+
+          <div class="legal-card">
+            <img
+              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"
+              alt="Bukti Legalitas"
+            />
+            <div class="legal-info">
+              <span class="legal-badge">Izin</span>
+              <h3>Izin Edar</h3>
+              <p>
+                Seluruh produk memiliki izin edar sesuai regulasi alat kesehatan
+                nasional.
+              </p>
+            </div>
+          </div>
+
+          <div class="legal-card">
+            <img
+              src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5"
+              alt="Bukti Legalitas"
+            />
+            <div class="legal-info">
+              <span class="legal-badge">Standar</span>
+              <h3>Standar Kesehatan</h3>
+              <p>
+                Produk memenuhi standar mutu dan keamanan alat kesehatan dental.
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- ===================== BARANG ===================== -->
-    <section id="barang">
-        <div class="container">
-            <h2>Jenis Barang Dental</h2>
 
-            <div class="barang-grid">
-                <div class="barang-item">Dental Unit & Chair</div>
-                <div class="barang-item">Alat X-Ray Dental</div>
-                <div class="barang-item">Handpiece & Turbin</div>
-                <div class="barang-item">Ultrasonic Scaler</div>
-                <div class="barang-item">Dental Lamp</div>
-                <div class="barang-item">Peralatan Sterilisasi</div>
+    <section id="barang" class="barang-section">
+      <div class="container">
+        <h2>Jenis Barang Dental</h2>
+
+        <div class="barang-scroll">
+          <div class="barang-track">
+            <div class="barang-card">
+              <img
+                src="https://images.unsplash.com/photo-1722586663955-2f96a4c1f255?q=80&w=1071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
+              <span>Dental Unit & Chair</span>
             </div>
+
+            <div class="barang-card">
+              <img
+                src="https://images.unsplash.com/photo-1600170311833-c2cf5280ce49?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
+              <span>Alat X-Ray Dental</span>
+            </div>
+
+            <div class="barang-card">
+              <img
+                src="https://images.unsplash.com/photo-1606811918860-650ddb9f5a7c?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
+              <span>Handpiece & Turbin</span>
+            </div>
+
+            <div class="barang-card">
+              <img
+                src="https://images.unsplash.com/photo-1626736985932-c0df2ae07a2e?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              />
+              <span>Ultrasonic Scaler</span>
+            </div>
+            <div class="barang-card">
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAVqXlimIGeYYEaQ8dhb1HdqDBMK7vwPqT7g&s"
+              />
+              <span>Dental Lamp</span>
+            </div>
+            <div class="barang-card">
+              <img
+                src="https://www.mydentalclinicbandung.com/assets/image/article/autoclaf.jpg"
+              />
+              <span>Peralatan Sterilisasi</span>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
+
+    <!-- <section id="barang">
+      <div class="container">
+        <h2>Jenis Barang Dental</h2>
+
+        <div class="barang-grid">
+          <div class="barang-item">Dental Unit & Chair</div>
+          <div class="barang-item">Alat X-Ray Dental</div>
+          <div class="barang-item">Handpiece & Turbin</div>
+          <div class="barang-item">Ultrasonic Scaler</div>
+          <div class="barang-item">Dental Lamp</div>
+          <div class="barang-item">Peralatan Sterilisasi</div>
+        </div>
+      </div>
+    </section> -->
 
     <!-- ===================== FOOTER ===================== -->
     <footer>
-        <p>Copyright © Azuri Dental</p>
+      <p>Copyright © Azuri Dental</p>
     </footer>
+    <script>
+      const header = document.querySelector("header");
 
-</body>
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("scrolled", window.scrollY > 10);
+      });
+    </script>
+  </body>
 </html>
