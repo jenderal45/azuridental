@@ -17,6 +17,10 @@
         font-family: Arial, Helvetica, sans-serif;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
         background-color: #f6f6f6;
         color: #333;
@@ -97,6 +101,55 @@
 
       .nav-menu a:hover {
         color: #d9e6ff;
+      }
+
+      .hamburger {
+        display: none;
+        font-size: 26px;
+        cursor: pointer;
+        color: #d1ecff;
+      }
+
+      .sidebar {
+        position: fixed;
+        top: 0;
+        left: -360px;
+        width: 260px;
+        height: 100vh;
+        background: rgba(123, 137, 154, 0.65);
+        backdrop-filter: blur(12px);
+        padding: 80px 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+      }
+
+      .sidebar a {
+        color: #d1ecff;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.3s;
+        z-index: 999;
+      }
+
+      .sidebar.active {
+        left: 0;
+      }
+
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       /* ===================== HERO SECTION ===================== */
@@ -184,10 +237,10 @@
       }
 
       .produk-card img {
-        height: 220px;
+        height: 160px;
+        width: 100%;
         object-fit: cover;
-        filter: grayscale(20%);
-        transition: 0.3s;
+        filter: grayscale(40%);
       }
 
       .produk-card:hover img {
@@ -378,7 +431,7 @@
       /* Mobile */
       @media (max-width: 767px) {
         .navbar {
-          flex-direction: column;
+          display: flex;
           align-items: flex-start;
         }
 
@@ -423,6 +476,14 @@
         .barang-track {
           gap: 16px;
         }
+
+        .desktop-menu {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
       }
     </style>
   </head>
@@ -432,14 +493,27 @@
     <header>
       <div class="container navbar">
         <div class="logo">Azuri Dental</div>
-        <nav class="nav-menu">
+
+        <nav class="nav-menu desktop-menu">
           <a href="#home">Home</a>
           <a href="#produk">Best Produk</a>
           <a href="#legalitas">Legalitas</a>
           <a href="#barang">Barang</a>
         </nav>
+
+        <div class="hamburger" id="hamburger">☰</div>
       </div>
     </header>
+
+    <div class="sidebar" id="sidebar">
+      <div class="logo">Azuri Dental</div>
+      <a href="#home">Home</a>
+      <a href="#produk">Best Produk</a>
+      <a href="#legalitas">Legalitas</a>
+      <a href="#barang">Barang</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
 
     <!-- ===================== HERO / HOME ===================== -->
     <section class="hero" id="home">
@@ -647,6 +721,32 @@
 
       window.addEventListener("scroll", () => {
         header.classList.toggle("scrolled", window.scrollY > 10);
+      });
+
+      const hamburger = document.getElementById("hamburger");
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const mediaQuery = window.matchMedia("(min-width: 768px)");
+
+      function handleWidthChange(mq) {
+        if (mq.matches) {
+          sidebar.classList.remove("active");
+          overlay.classList.remove("active");
+        }
+      }
+
+      handleWidthChange(mediaQuery);
+
+      mediaQuery.addListener(handleWidthChange);
+
+      hamburger.addEventListener("click", () => {
+        sidebar.classList.add("active");
+        overlay.classList.add("active");
+      });
+
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
       });
     </script>
   </body>
